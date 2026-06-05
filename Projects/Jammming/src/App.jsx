@@ -22,9 +22,13 @@ function App() {
   setPlaylistTracks(prev => [...prev, track]) }
   };
 
+  const removeTrack = (track) => {
+      setPlaylistTracks(prev => prev.filter(item => item.id !== track.id))
+    };
+
   return (
 <div className="App">
-  <Playlist addTrack={addTrack} playlistName={playlistName} playlistTracks={playlistTracks}/>
+  <Playlist addTrack={addTrack} removeTrack={removeTrack} playlistName={playlistName} playlistTracks={playlistTracks}/>
   <SearchBar />
   <SearchResults addTrack={addTrack} searchResults={fakeTracks} />
 </div>

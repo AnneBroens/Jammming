@@ -1,12 +1,13 @@
-function Track ({track, addTrack}) {
-    console.log('addTrack in Track:', addTrack);
+function Track ({track, addTrack, removeTrack}) {
+     console.log('removeTrack in Track:', removeTrack);
     return (
         <div>
             <p>{track.title}</p>
             <p>{track.artist}</p>
             <p>{track.album}</p>
-            <button onClick={() => addTrack(track)} >+</button>
-            <button>-</button>
+            {addTrack && <button onClick={() => addTrack(track)}>+</button>}
+            {removeTrack && <button onClick={() => removeTrack(track)}>-</button>}
+
         </div>
     );
 }

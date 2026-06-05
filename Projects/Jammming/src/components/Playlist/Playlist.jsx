@@ -1,11 +1,11 @@
 
 import TrackList from '../TrackList/TrackList';
 
-function Playlist ( {playlistName, playlistTracks, addTrack}) {
+function Playlist ( {playlistName, playlistTracks, removeTrack}) {
     return (
         <div>
         <h1>{playlistName}</h1>
-        <TrackList addTrack={addTrack} tracks={playlistTracks}/>
+        <TrackList removeTrack={removeTrack} tracks={playlistTracks}/>
         <button>Save to Spotify</button>
         </div>
     );

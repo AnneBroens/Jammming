@@ -1,7 +1,7 @@
 
 import TrackList from '../TrackList/TrackList';
 
-function Playlist ( {playlistName, playlistTracks, removeTrack, updateName}) {
+function Playlist ( {playlistName, playlistTracks, removeTrack, updateName, savePlaylist}) {
     return (
         <div>
         <input 
@@ -12,7 +12,7 @@ function Playlist ( {playlistName, playlistTracks, removeTrack, updateName}) {
         removeTrack={removeTrack} 
         tracks={playlistTracks}
         />
-        <button>Save to Spotify</button>
+        <button onClick={savePlaylist}>Save to Spotify</button>
         </div>
     );
 }

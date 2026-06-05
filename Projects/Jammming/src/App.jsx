@@ -7,9 +7,9 @@ import SearchResults from './components/SearchResults/SearchResults';
 
 
 const fakeTracks = [
-{id: 1, title: 'Sunrise', artist: 'Norah Jones', album: 'Feels Like Home'},
-{id: 2, title: 'Man I Need', artist:'Olivia Dean', album: 'The Art Of Loving'},
-{id: 3, title: 'Wuthering Heights', artist: 'Kate Bush', album: 'The Kick Inside'},
+{id: 1, title: 'Sunrise', artist: 'Norah Jones', album: 'Feels Like Home', uri: 'spotify:track:7zkLpY72g6lKQbiHDqri1S?si'},
+{id: 2, title: 'Man I Need', artist:'Olivia Dean', album: 'The Art Of Loving', uri: 'spotify:track:1qbmS6ep2hbBRaEZFpn7BX'},
+{id: 3, title: 'Wuthering Heights', artist: 'Kate Bush', album: 'The Kick Inside', uri: 'spotify:track:5YSI1311X8t31PBjkBG4CZ?si'},
 ];
 
 function App() {
@@ -30,6 +30,13 @@ function App() {
   setPlaylistName(name)
   };
 
+  const savePlaylist = () => {
+  const trackUris = playlistTracks.map(track => track.uri );
+    setPlaylistName('New Playlist')
+    setPlaylistTracks([])
+  };
+
+
   return (
 <div className="App">
   <Playlist 
@@ -37,6 +44,7 @@ function App() {
   playlistName={playlistName} 
   playlistTracks={playlistTracks}
   updateName={updateName}
+  savePlaylist={savePlaylist}
   />
   <SearchBar />
   <SearchResults 

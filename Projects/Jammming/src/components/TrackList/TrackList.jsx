@@ -1,6 +1,7 @@
 import Track from '../Track/Track'
 
-function TrackList({tracks}) {
+function TrackList({tracks, addTrack}) {
+        console.log('addTrack in TrackList:', addTrack);
     return (
         <div>
             <div>
@@ -9,7 +10,7 @@ function TrackList({tracks}) {
                 <p>Artist</p>
             </div>
                 {tracks.map (track => (
-                <Track key={track.id} track={track} /> 
+                <Track addTrack={addTrack} key={track.id} track={track} /> 
             ))}
         </div>
     );

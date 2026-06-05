@@ -1,11 +1,11 @@
-
-function Track ({track}) {
+function Track ({track, addTrack}) {
+    console.log('addTrack in Track:', addTrack);
     return (
         <div>
             <p>{track.title}</p>
             <p>{track.artist}</p>
             <p>{track.album}</p>
-            <button>+</button>
+            <button onClick={() => addTrack(track)} >+</button>
             <button>-</button>
         </div>
     );

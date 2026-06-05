@@ -14,14 +14,19 @@ const fakeTracks = [
 
 function App() {
   const [searchResults, setSearchResults] = useState(fakeTracks);
-  const [playlistName, setplaylistName] = useState('My Playlist');
-  const [playlistTracks, setplaylistTracks] = useState(fakeTracks);
+  const [playlistName, setPlaylistName] = useState('My Playlist');
+  const [playlistTracks, setPlaylistTracks] = useState([]);
+
+  const addTrack = (track) => {
+ if(!playlistTracks.find(item => item.id === track.id)) {
+  setPlaylistTracks(prev => [...prev, track]) }
+  };
 
   return (
 <div className="App">
-  <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
+  <Playlist addTrack={addTrack} playlistName={playlistName} playlistTracks={playlistTracks}/>
   <SearchBar />
-  <SearchResults searchResults={fakeTracks} />
+  <SearchResults addTrack={addTrack} searchResults={fakeTracks} />
 </div>
   );
 }

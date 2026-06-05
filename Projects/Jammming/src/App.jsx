@@ -1,8 +1,9 @@
 import './App.css'
-import Playlist from './components/Playlist/Playlist'
-import TrackList from './components/TrackList/TrackList'
-import SearchBar from './components/SearchBar/SearchBar'
-import SearchResults from './components/SearchResults/SearchResults'
+import { useState } from 'react';
+import Playlist from './components/Playlist/Playlist';
+import TrackList from './components/TrackList/TrackList';
+import SearchBar from './components/SearchBar/SearchBar';
+import SearchResults from './components/SearchResults/SearchResults';
 
 
 const fakeTracks = [
@@ -12,10 +13,13 @@ const fakeTracks = [
 ];
 
 function App() {
+  const [searchResults, setSearchResults] = useState(fakeTracks);
+  const [playlistName, setplaylistName] = useState('My Playlist');
+  const [playlistTracks, setplaylistTracks] = useState(fakeTracks);
 
   return (
 <div className="App">
-  <Playlist />
+  <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
   <SearchBar />
   <SearchResults searchResults={fakeTracks} />
 </div>

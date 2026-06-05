@@ -18,7 +18,7 @@ function App() {
   const [playlistTracks, setPlaylistTracks] = useState([]);
 
   const addTrack = (track) => {
- if(!playlistTracks.find(item => item.id === track.id)) {
+  if(!playlistTracks.find(item => item.id === track.id)) {
   setPlaylistTracks(prev => [...prev, track]) }
   };
 
@@ -26,11 +26,23 @@ function App() {
       setPlaylistTracks(prev => prev.filter(item => item.id !== track.id))
     };
 
+  const updateName = (name) => {
+  setPlaylistName(name)
+  };
+
   return (
 <div className="App">
-  <Playlist addTrack={addTrack} removeTrack={removeTrack} playlistName={playlistName} playlistTracks={playlistTracks}/>
+  <Playlist 
+  removeTrack={removeTrack} 
+  playlistName={playlistName} 
+  playlistTracks={playlistTracks}
+  updateName={updateName}
+  />
   <SearchBar />
-  <SearchResults addTrack={addTrack} searchResults={fakeTracks} />
+  <SearchResults 
+  addTrack={addTrack} 
+  searchResults={fakeTracks} 
+  />
 </div>
   );
 }

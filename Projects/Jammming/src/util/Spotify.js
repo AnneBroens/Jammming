@@ -24,43 +24,52 @@ const generateCodeChallenge = async (codeVerifier) => {
 
 const Spotify = {
   async getAccessToken() {
-    // check if we already have a token
     if (accessToken) {
       return accessToken;
     }
 
-    // check if Spotify redirected back with a code
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
 
     if (code) {
-      // exchange code for token
       const codeVerifier = localStorage.getItem('codeVerifier');
-     const response = await fetch('https://accounts.spotify.com/api/token', {
-       method: 'POST',
-       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
-        grant_type: 'authorization_code',
-        code: code,
-        redirect_uri: redirectUri,
-        client_id: clientId,
-       code_verifier: codeVerifier,
-  })
-});
-
-const data = await response.json();
-accessToken = data.access_token;
-window.history.pushState('', '', '/');
-return accessToken;
+          grant_type: 'authorization_code',
+          code: code,
+          redirect_uri: redirectUri,
+          client_id: clientId,
+          code_verifier: codeVerifier,
+        })
+      });
+      const data = await response.json();
+      accessToken = data.access_token;
+      window.history.pushState('', '', '/');
+      return accessToken;
     } else {
-      // no code yet, redirect to Spotify login
       const codeVerifier = generateCodeVerifier();
       const codeChallenge = await generateCodeChallenge(codeVerifier);
       localStorage.setItem('codeVerifier', codeVerifier);
-      
       window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&code_challenge_method=S256&code_challenge=${codeChallenge}&scope=playlist-modify-public`;
     }
-  }
+  },
+
+  async search(term) {
+  const token = await this.getAccessToken();
+  const response = await fetch(`https://api.spotify.com/v1/search?q=${term}&type=track`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  const data = await response.json();
+  return data.tracks.items.map(track => ({
+    id: track.id,
+    name: track.name,
+    artist: track.artists[0].name,
+    album: track.album.name,
+    uri: track.uri
+  }));
+}
 };
 
 export default Spotify;

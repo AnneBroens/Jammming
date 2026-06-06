@@ -1,5 +1,5 @@
 const clientId = 'b6b1c88e60114764b7e5d4c0e23c4933';
-const redirectUri = 'https://localhost:5173/';
+const redirectUri = 'https://cheerful-druid-43e4ac.netlify.app/';
 
 let accessToken;
 

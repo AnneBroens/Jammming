@@ -9,7 +9,11 @@ function TrackList({tracks, addTrack, removeTrack}) {
                 <p>Artist</p>
             </div>
                 {tracks.map (track => (
-                <Track addTrack={addTrack} removeTrack={removeTrack} key={track.id} track={track} /> 
+                <Track 
+                addTrack={addTrack} 
+                removeTrack={removeTrack} 
+                key={track.id} 
+                track={track} /> 
             ))}
         </div>
     );

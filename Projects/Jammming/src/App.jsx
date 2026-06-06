@@ -1,9 +1,10 @@
 import './App.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Playlist from './components/Playlist/Playlist';
 import TrackList from './components/TrackList/TrackList';
 import SearchBar from './components/SearchBar/SearchBar';
 import SearchResults from './components/SearchResults/SearchResults';
+import Spotify from './util/Spotify';
 
 
 const fakeTracks = [
@@ -16,6 +17,10 @@ function App() {
   const [searchResults, setSearchResults] = useState(fakeTracks);
   const [playlistName, setPlaylistName] = useState('My Playlist');
   const [playlistTracks, setPlaylistTracks] = useState([]);
+
+  useEffect(() => {
+    Spotify.getAccessToken();
+  }, []);
 
   const addTrack = (track) => {
   if(!playlistTracks.find(item => item.id === track.id)) {
@@ -53,6 +58,6 @@ function App() {
   />
 </div>
   );
-}
+};
 
 export default App

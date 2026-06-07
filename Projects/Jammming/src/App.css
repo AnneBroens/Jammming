@@ -6,28 +6,11 @@
   padding: 0;
 }
 
-:root {
-  --pink: #FF6B9D;
-  --yellow: #FFD93D;
-  --teal: #4ECDC4;
-  --purple: #A78BFA;
-  --coral: #FF6B6B;
-  --bg: #FFF9F0;
-  --card-bg: #FFFFFF;
-  --text: #1a1a2e;
-  --text-muted: #6B7280;
-  --radius: 16px;
-  --shadow: 4px 4px 0px #1a1a2e;
-}
-
 body {
   font-family: 'DM Sans', sans-serif;
-  background-color: var(--bg);
-  background-image: radial-gradient(circle at 20% 20%, #FFD93D22 0%, transparent 50%),
-                    radial-gradient(circle at 80% 80%, #FF6B9D22 0%, transparent 50%),
-                    radial-gradient(circle at 50% 50%, #4ECDC422 0%, transparent 60%);
+  background-color: #FFF9F0;
   min-height: 100vh;
-  color: var(--text);
+  color: #1a1a2e;
 }
 
 .App {
@@ -36,98 +19,117 @@ body {
   padding: 2rem 1.5rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 1fr;
   gap: 1.5rem;
 }
 
-/* SearchBar — spans full width */
-.App > div:has(input[type="text"]) {
+/* SearchBar */
+.searchbar {
   grid-column: 1 / -1;
   display: flex;
   gap: 0.75rem;
-  background: var(--card-bg);
-  border: 2px solid var(--text);
-  border-radius: var(--radius);
+  background: white;
+  border: 2px solid #1a1a2e;
+  border-radius: 16px;
   padding: 1rem 1.25rem;
-  box-shadow: var(--shadow);
+  box-shadow: 4px 4px 0px #1a1a2e;
 }
 
-.App > div:has(input[type="text"]) input {
+.searchbar input {
   flex: 1;
   border: none;
   outline: none;
   font-family: 'DM Sans', sans-serif;
   font-size: 1rem;
-  color: var(--text);
+  color: #1a1a2e;
   background: transparent;
 }
 
-.App > div:has(input[type="text"]) input::placeholder {
-  color: var(--text-muted);
+.searchbar input::placeholder {
+  color: #9CA3AF;
 }
 
-.App > div:has(input[type="text"]) button {
-  background: var(--yellow);
-  color: var(--text);
-  border: 2px solid var(--text);
+.searchbar button {
+  background: #FFD93D;
+  color: #1a1a2e;
+  border: 2px solid #1a1a2e;
   border-radius: 12px;
   padding: 0.5rem 1.25rem;
   font-family: 'Paytone One', sans-serif;
   font-size: 0.9rem;
   cursor: pointer;
-  box-shadow: 2px 2px 0px var(--text);
+  box-shadow: 2px 2px 0px #1a1a2e;
   transition: transform 0.1s, box-shadow 0.1s;
 }
 
-.App > div:has(input[type="text"]) button:hover {
+.searchbar button:hover {
   transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px var(--text);
+  box-shadow: 3px 3px 0px #1a1a2e;
 }
 
-.App > div:has(input[type="text"]) button:active {
+.searchbar button:active {
   transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px var(--text);
+  box-shadow: none;
 }
 
-/* SearchResults and Playlist panels */
-.App > div:not(:has(input[type="text"])) {
-  background: var(--card-bg);
-  border: 2px solid var(--text);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+/* Panels */
+.search-results,
+.playlist {
+  background: white;
+  border: 2px solid #1a1a2e;
+  border-radius: 16px;
+  box-shadow: 4px 4px 0px #1a1a2e;
   padding: 1.25rem;
-  overflow: hidden;
 }
 
 /* Headings */
-h1, h2 {
-  font-family: 'Paytone One', sans-serif;
-}
-
 h2 {
+  font-family: 'Paytone One', sans-serif;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--text);
-  color: var(--text);
+  border-bottom: 2px solid #1a1a2e;
 }
 
 /* Playlist name input */
-input[value] {
+.playlist-name {
   font-family: 'Paytone One', sans-serif;
   font-size: 1.2rem;
   border: none;
-  border-bottom: 2px dashed var(--purple);
+  border-bottom: 2px dashed #A78BFA;
   outline: none;
   background: transparent;
-  color: var(--text);
+  color: #1a1a2e;
   width: 100%;
   margin-bottom: 1rem;
   padding-bottom: 0.25rem;
 }
 
-/* Track rows */
-.App > div > div > div > div {
+/* TrackList */
+.tracklist {
+  max-height: 450px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #A78BFA transparent;
+}
+
+.tracklist-header {
+  display: flex;
+  padding: 0 0.75rem 0.5rem;
+  border-bottom: 1.5px solid #1a1a2e;
+  margin-bottom: 0.5rem;
+}
+
+.tracklist-header p {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6B7280;
+  flex: 1;
+}
+
+/* Track */
+.track {
   display: flex;
   align-items: center;
   padding: 0.6rem 0.75rem;
@@ -137,55 +139,40 @@ input[value] {
   transition: background 0.15s, border-color 0.15s;
 }
 
-.App > div > div > div > div:hover {
-  background: var(--bg);
-  border-color: var(--text);
+.track:hover {
+  background: #FFF9F0;
+  border-color: #1a1a2e;
 }
 
-/* Track text */
-.App > div > div > div > div p {
-  font-size: 0.85rem;
+.track-info {
   flex: 1;
-  color: var(--text);
+  overflow: hidden;
+}
+
+.track-name {
+  font-weight: 500;
+  font-size: 0.9rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-right: 0.5rem;
 }
 
-.App > div > div > div > div p:first-child {
-  font-weight: 500;
-  font-size: 0.9rem;
-}
-
-.App > div > div > div > div p:not(:first-child) {
-  color: var(--text-muted);
+.track-artist,
+.track-album {
   font-size: 0.8rem;
-}
-
-/* Column headers */
-.App > div > div > div:first-child {
-  display: flex;
-  padding: 0 0.75rem 0.5rem;
-  border-bottom: 1.5px solid var(--text);
-  margin-bottom: 0.5rem;
-}
-
-.App > div > div > div:first-child p {
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  flex: 1;
+  color: #6B7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* + and - buttons */
-button:not(:has(*)) {
+.btn-add,
+.btn-remove {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 2px solid var(--text);
+  border: 2px solid #1a1a2e;
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
@@ -194,78 +181,56 @@ button:not(:has(*)) {
   justify-content: center;
   flex-shrink: 0;
   transition: transform 0.1s, box-shadow 0.1s;
-  box-shadow: 2px 2px 0px var(--text);
+  box-shadow: 2px 2px 0px #1a1a2e;
+  margin-left: 0.5rem;
 }
 
-button:not(:has(*)):hover {
+.btn-add {
+  background: #4ECDC4;
+  color: #1a1a2e;
+}
+
+.btn-remove {
+  background: #FF6B6B;
+  color: white;
+}
+
+.btn-add:hover,
+.btn-remove:hover {
   transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px var(--text);
+  box-shadow: 3px 3px 0px #1a1a2e;
 }
 
-button:not(:has(*)):active {
+.btn-add:active,
+.btn-remove:active {
   transform: translate(1px, 1px);
   box-shadow: none;
 }
 
-/* + button — teal */
-button[onClick*="addTrack"],
-button:not(:has(*)):nth-of-type(1) {
-  background: var(--teal);
-  color: var(--text);
-}
-
-/* - button — coral */
-button[onClick*="removeTrack"],
-button:not(:has(*)):nth-of-type(2) {
-  background: var(--coral);
+/* Save button */
+.btn-save {
+  width: 100%;
+  background: #FF6B9D;
   color: white;
+  border: 2px solid #1a1a2e;
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  font-family: 'Paytone One', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #1a1a2e;
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
-/* Save to Spotify button */
-button[onClick*="savePlaylist"],
-.App > div > div ~ button,
-.App > div > button:last-child {
-  width: 100% !important;
-  height: auto !important;
-  border-radius: 12px !important;
-  border: 2px solid var(--text) !important;
-  background: var(--pink) !important;
-  color: white !important;
-  font-family: 'Paytone One', sans-serif !important;
-  font-size: 1rem !important;
-  padding: 0.75rem !important;
-  margin-top: 1rem !important;
-  cursor: pointer !important;
-  box-shadow: 3px 3px 0px var(--text) !important;
-  transition: transform 0.1s, box-shadow 0.1s !important;
-  letter-spacing: 0.02em !important;
+.btn-save:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #1a1a2e;
 }
 
-button:last-child:hover {
-  transform: translate(-2px, -2px) !important;
-  box-shadow: 5px 5px 0px var(--text) !important;
-}
-
-button:last-child:active {
-  transform: translate(1px, 1px) !important;
-  box-shadow: 1px 1px 0px var(--text) !important;
-}
-
-/* Scrollable track lists */
-.App > div > div {
-  max-height: 500px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--purple) transparent;
-}
-
-.App > div > div::-webkit-scrollbar {
-  width: 4px;
-}
-
-.App > div > div::-webkit-scrollbar-thumb {
-  background: var(--purple);
-  border-radius: 4px;
+.btn-save:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
 }
 
 /* Responsive */
@@ -274,7 +239,7 @@ button:last-child:active {
     grid-template-columns: 1fr;
   }
 
-  .App > div:has(input[type="text"]) {
+  .searchbar {
     grid-column: 1;
   }
 }

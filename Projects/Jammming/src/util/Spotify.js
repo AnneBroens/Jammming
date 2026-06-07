@@ -53,6 +53,7 @@ const Spotify = {
       const codeChallenge = await generateCodeChallenge(codeVerifier);
       localStorage.setItem('codeVerifier', codeVerifier);
       window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&code_challenge_method=S256&code_challenge=${codeChallenge}&scope=playlist-modify-public%20playlist-modify-private`;
+    }
   },
 
   async search(term) {
@@ -90,6 +91,7 @@ const Spotify = {
     body: JSON.stringify({ name: playlistName })
   });
   const playlistData = await playlistResponse.json();
+  console.log('playlist response:', playlistData);  // add this line
   const playlistId = playlistData.id;
 
   // Step 3: Add tracks

@@ -52,8 +52,7 @@ const Spotify = {
       const codeVerifier = generateCodeVerifier();
       const codeChallenge = await generateCodeChallenge(codeVerifier);
       localStorage.setItem('codeVerifier', codeVerifier);
-      window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&code_challenge_method=S256&code_challenge=${codeChallenge}&scope=playlist-modify-public`;
-    }
+      window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&code_challenge_method=S256&code_challenge=${codeChallenge}&scope=playlist-modify-public%20playlist-modify-private`;
   },
 
   async search(term) {

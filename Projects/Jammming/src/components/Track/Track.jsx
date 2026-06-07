@@ -9,9 +9,7 @@ function Track ({track, addTrack, removeTrack}) {
             </div>
             {addTrack && <button className="btn-add" onClick={() => addTrack(track)}>+</button>}
             {removeTrack && <button className="btn-remove" onClick={() => removeTrack(track)}>-</button>}
-            {track.preview_url && (
-  <audio controls src={track.preview_url} />
-)}
+            <img className="track-image" src={track.image} alt={track.album} />
         </div>
     );
 }

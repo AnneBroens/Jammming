@@ -10,6 +10,7 @@ const generateCodeVerifier = () => {
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
     .replace(/=/g, '');
+
 };
 
 const generateCodeChallenge = async (codeVerifier) => {
@@ -75,7 +76,7 @@ const Spotify = {
     artist: track.artists[0].name,
     album: track.album.name,
     uri: track.uri,
-    image: track.album.images[1]?.url
+    image: track.album.images[1]?.url,
   }));
 },
 

@@ -69,7 +69,40 @@ const Spotify = {
     album: track.album.name,
     uri: track.uri
   }));
-}
+},
+
+ async savePlaylist(playlistName, trackUris) {
+  const token = await this.getAccessToken();
+
+  // Step 1: Get user ID
+  const userResponse = await fetch('https://api.spotify.com/v1/me', {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  const userData = await userResponse.json();
+  const userId = userData.id;
+
+  // Step 2: Create playlist
+  const playlistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+    method: 'POST',
+    headers: { 
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: playlistName })
+  });
+  const playlistData = await playlistResponse.json();
+  const playlistId = playlistData.id;
+
+  // Step 3: Add tracks
+  await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+    method: 'POST',
+    headers: { 
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ uris: trackUris })
+  });
 };
+}
 
 export default Spotify;

@@ -1,5 +1,4 @@
 function Track ({track, addTrack, removeTrack}) {
-     console.log('removeTrack in Track:', removeTrack);
     return (
         <div>
             <p>{track.title}</p>

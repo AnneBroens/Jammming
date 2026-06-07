@@ -41,23 +41,22 @@ function App() {
   };
 
 
-  return (
-<div className="App">
-  <Playlist 
-  removeTrack={removeTrack} 
-  playlistName={playlistName} 
-  playlistTracks={playlistTracks}
-  updateName={updateName}
-  savePlaylist={savePlaylist}
-  />
-  <SearchBar
-  handleSearch={handleSearch} />
-  <SearchResults 
-   addTrack={addTrack} 
-    searchResults={searchResults} 
-  />
-</div>
-  );
+return (
+  <div className="App">
+    <SearchBar handleSearch={handleSearch} />
+    <SearchResults 
+      addTrack={addTrack} 
+      searchResults={searchResults} 
+    />
+    <Playlist 
+      removeTrack={removeTrack} 
+      playlistName={playlistName} 
+      playlistTracks={playlistTracks}
+      updateName={updateName}
+      savePlaylist={savePlaylist}
+    />
+  </div>
+);
 };
 
 export default App

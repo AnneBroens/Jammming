@@ -72,7 +72,6 @@ const Spotify = {
 },
 
  async savePlaylist(playlistName, trackUris) {
-  console.log('saving playlist:', playlistName, playlistTracks);
   const token = await this.getAccessToken();
 
   // Step 1: Get user ID
@@ -103,7 +102,7 @@ const Spotify = {
     },
     body: JSON.stringify({ uris: trackUris })
   });
-};
 }
+};
 
 export default Spotify;

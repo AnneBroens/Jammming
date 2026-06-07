@@ -23,6 +23,9 @@ const generateCodeChallenge = async (codeVerifier) => {
 };
 
 const Spotify = {
+  
+
+  
   async getAccessToken() {
     if (accessToken) {
       return accessToken;
@@ -44,6 +47,8 @@ const Spotify = {
           code_verifier: codeVerifier,
         })
       });
+
+  
       const data = await response.json();
       accessToken = data.access_token;
       window.history.pushState('', '', '/');
@@ -62,6 +67,7 @@ const Spotify = {
     headers: { 'Authorization': `Bearer ${token}` }
   });
   const data = await response.json();
+  console.log('first track:', data.tracks.items[0]);
   return data.tracks.items.map(track => ({
     id: track.id,
     name: track.name,
